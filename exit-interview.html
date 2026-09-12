@@ -1,0 +1,836 @@
+<!doctype html>
+<title>Exit Interview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #e8eaef;
+    --surface: #ffffff;
+    --surface-alt: #f2f3f6;
+    --header-bg-1: #0f1014;
+    --header-bg-2: #1b1d24;
+    --header-text: #f3f4f7;
+    --header-text-muted: #9aa0ab;
+    --ink: #17181c;
+    --text: #26282c;
+    --text-muted: #5b6472;
+    --border: #d7dbe2;
+    --accent: #3333cc;
+    --accent-strong: #262699;
+    --accent-dim: #e3e3fa;
+    --accent-contrast: #ffffff;
+    --danger: #b3261e;
+    --danger-bg: #fbe9e7;
+    --success: #1f8a57;
+    --focus-ring: #3333cc;
+    --shadow: 0 1px 2px rgba(15, 16, 20, 0.04), 0 8px 24px rgba(15, 16, 20, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c0d10;
+      --surface: #17181d;
+      --surface-alt: #1e2027;
+      --header-text-muted: #8a90a0;
+      --ink: #eef0f4;
+      --text: #e7e9ee;
+      --text-muted: #99a0ad;
+      --border: #2b2e36;
+      --accent: #8686ff;
+      --accent-strong: #a3a3ff;
+      --accent-dim: #24244a;
+      --accent-contrast: #0c0d10;
+      --danger: #ff8a80;
+      --danger-bg: #3a1f1f;
+      --success: #4ade95;
+      --focus-ring: #8686ff;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0c0d10;
+    --surface: #17181d;
+    --surface-alt: #1e2027;
+    --header-text-muted: #8a90a0;
+    --ink: #eef0f4;
+    --text: #e7e9ee;
+    --text-muted: #99a0ad;
+    --border: #2b2e36;
+    --accent: #8686ff;
+    --accent-strong: #a3a3ff;
+    --accent-dim: #24244a;
+    --accent-contrast: #0c0d10;
+    --danger: #ff8a80;
+    --danger-bg: #3a1f1f;
+    --success: #4ade95;
+    --focus-ring: #8686ff;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, .eyebrow, .step-num, .progress-label, button {
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  a { color: var(--accent); }
+
+  .hero {
+    background: linear-gradient(150deg, var(--header-bg-1), var(--header-bg-2));
+    color: var(--header-text);
+    padding-block: clamp(28px, 5vw, 44px);
+    padding-inline: 20px;
+  }
+
+  .hero-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 18px;
+  }
+
+  .brand-badge {
+    background: #e9eaef;
+    border-radius: 10px;
+    padding: 8px 16px;
+    line-height: 0;
+  }
+
+  .brand-badge img {
+    display: block;
+    height: 22px;
+    width: auto;
+  }
+
+  .brand-for {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--header-text-muted);
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .hero p {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--header-text-muted);
+    font-size: 15px;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-block: 28px 56px;
+  }
+
+  .progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 22px;
+  }
+
+  .progress-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .progress-track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .progress-step.done .progress-track,
+  .progress-step.active .progress-track {
+    background: var(--accent);
+  }
+
+  .progress-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .progress-step.active .progress-label,
+  .progress-step.done .progress-label {
+    color: var(--text);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: clamp(20px, 4vw, 32px);
+  }
+
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .step-num {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .step-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .step-sub {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 4px 0 22px;
+  }
+
+  .step { display: none; }
+  .step.visible { display: block; animation: step-in 0.25s ease; }
+
+  @keyframes step-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step.visible { animation: none; }
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .field-grid .span-2 { grid-column: 1 / -1; }
+
+  @media (max-width: 520px) {
+    .field-grid { grid-template-columns: 1fr; }
+  }
+
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .field-grid > .field { margin-bottom: 0; }
+
+  label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  label .opt {
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  input, select, textarea {
+    font: inherit;
+    color: var(--text);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    width: 100%;
+  }
+
+  select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%); background-position: calc(100% - 18px) center, calc(100% - 13px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 32px; }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 1px;
+  }
+
+  .field.invalid input, .field.invalid select, .field.invalid textarea {
+    border-color: var(--danger);
+  }
+
+  .field-error {
+    font-size: 12.5px;
+    color: var(--danger);
+    display: none;
+  }
+
+  .field.invalid .field-error { display: block; }
+
+  .tenure-readout {
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface-alt);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .checkbox-row input { width: 18px; height: 18px; margin-top: 2px; flex: none; }
+  .checkbox-row label { font-weight: 600; }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    gap: 12px;
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 11px 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    margin-left: auto;
+  }
+
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-primary:disabled { opacity: 0.6; cursor: default; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover { background: var(--surface-alt); }
+  .btn-ghost:disabled { visibility: hidden; }
+
+  .confirm {
+    display: none;
+    text-align: center;
+    padding: 20px 8px 8px;
+  }
+
+  .confirm.visible { display: block; }
+
+  .confirm-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .confirm h2 { font-size: 21px; margin: 0 0 8px; }
+  .confirm p { color: var(--text-muted); font-size: 14px; max-width: 44ch; margin: 0 auto; }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    left: -9999px;
+  }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand-row">
+      <span class="brand-badge"><img src="m1-logo.png" alt="M1 Global"></span>
+      <span class="brand-for">for Metro One Security employees</span>
+    </div>
+    <h1>Exit Interview</h1>
+    <p>Your feedback shapes how we support the field. This takes about 5 minutes &mdash; answer honestly; your manager will not see individual responses before HR reviews them.</p>
+  </div>
+</header>
+
+<main>
+  <div class="progress" id="progress" role="list" aria-label="Form progress"></div>
+
+  <form class="card" id="exitForm" novalidate>
+
+    <section class="step visible" data-step="0">
+      <div class="step-head"><span class="step-num">01</span><h2 class="step-title">Role Information</h2></div>
+      <p class="step-sub">Tell us who you are and where you worked.</p>
+
+      <div class="field-grid">
+        <div class="field span-2">
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="fullName" type="text" required autocomplete="name">
+          <p class="field-error">Please enter your full name.</p>
+        </div>
+
+        <div class="field">
+          <label for="employeeId">Employee ID <span class="opt">(optional)</span></label>
+          <input id="employeeId" name="employeeId" type="text">
+        </div>
+
+        <div class="field">
+          <label for="company">Company / brand</label>
+          <select id="company" name="company" required>
+            <option value="">Select one&hellip;</option>
+            <option>M1 Global</option>
+            <option>Metro One Security</option>
+            <option>Other / Not sure</option>
+          </select>
+          <p class="field-error">Please select your company or brand.</p>
+        </div>
+
+        <div class="field">
+          <label for="jobTitle">Job title / position</label>
+          <input id="jobTitle" name="jobTitle" type="text" required>
+          <p class="field-error">Please enter your job title.</p>
+        </div>
+
+        <div class="field">
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="">Select one&hellip;</option>
+            <option>Security Operations (Field/Site)</option>
+            <option>Operations Management</option>
+            <option>Dispatch / Scheduling</option>
+            <option>Human Resources</option>
+            <option>Administration / Back Office</option>
+            <option>Sales / Business Development</option>
+            <option>Training</option>
+            <option>Other</option>
+          </select>
+          <p class="field-error">Please select a department.</p>
+        </div>
+
+        <div class="field span-2">
+          <label for="site">Site / client location</label>
+          <input id="site" name="site" type="text" required placeholder="e.g. Westfield Mall &ndash; Post 3">
+          <p class="field-error">Please enter your site or client location.</p>
+        </div>
+
+        <div class="field">
+          <label for="supervisor">Direct supervisor / manager <span class="opt">(optional)</span></label>
+          <input id="supervisor" name="supervisor" type="text">
+        </div>
+
+        <div class="field">
+          <label for="employmentType">Employment type</label>
+          <select id="employmentType" name="employmentType" required>
+            <option value="">Select one&hellip;</option>
+            <option>Full-Time</option>
+            <option>Part-Time</option>
+            <option>Per-Diem / On-Call</option>
+          </select>
+          <p class="field-error">Please select your employment type.</p>
+        </div>
+
+        <div class="field">
+          <label for="startDate">Start date</label>
+          <input id="startDate" name="startDate" type="date" required>
+          <p class="field-error">Please enter your start date.</p>
+        </div>
+
+        <div class="field">
+          <label for="lastDay">Last day worked</label>
+          <input id="lastDay" name="lastDay" type="date" required>
+          <p class="field-error">Please enter a valid last day (on or after your start date).</p>
+        </div>
+
+        <div class="field span-2">
+          <label>Length of employment</label>
+          <p class="tenure-readout" id="tenureReadout">Enter both dates above to calculate.</p>
+          <input type="hidden" id="tenure" name="tenure">
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="1">
+      <div class="step-head"><span class="step-num">02</span><h2 class="step-title">Separation Details</h2></div>
+      <p class="step-sub">Help us understand the circumstances of your departure.</p>
+
+      <div class="field-grid">
+        <div class="field span-2">
+          <label for="separationType">Separation type</label>
+          <select id="separationType" name="separationType" required>
+            <option value="">Select one&hellip;</option>
+            <option>Voluntary Resignation</option>
+            <option>Retirement</option>
+            <option>End of Assignment / Contract</option>
+            <option>Job Abandonment</option>
+            <option>Other</option>
+          </select>
+          <p class="field-error">Please select a separation type.</p>
+        </div>
+
+        <div class="field span-2">
+          <label for="primaryReason">Primary reason for leaving</label>
+          <select id="primaryReason" name="primaryReason" required></select>
+          <p class="field-error">Please select your primary reason for leaving.</p>
+        </div>
+
+        <div class="field span-2">
+          <label for="secondaryReason">Secondary reason <span class="opt">(optional)</span></label>
+          <select id="secondaryReason" name="secondaryReason"></select>
+        </div>
+
+        <div class="field">
+          <label for="noticeGiven">Advance notice given</label>
+          <select id="noticeGiven" name="noticeGiven" required>
+            <option value="">Select one&hellip;</option>
+            <option>Yes &ndash; 2 weeks or more</option>
+            <option>Yes &ndash; less than 2 weeks</option>
+            <option>No notice given</option>
+            <option>Not applicable</option>
+          </select>
+          <p class="field-error">Please select an option.</p>
+        </div>
+
+        <div class="field">
+          <label for="nextMove">Where are you headed? <span class="opt">(optional)</span></label>
+          <select id="nextMove" name="nextMove">
+            <option value="">Prefer not to say&hellip;</option>
+            <option>Competitor (security/staffing)</option>
+            <option>Different industry</option>
+            <option>Not currently employed</option>
+            <option>Retiring</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <div class="step-head"><span class="step-num">03</span><h2 class="step-title">Your Experience</h2></div>
+      <p class="step-sub">Rate each area based on your time with us.</p>
+      <div id="ratingFields"></div>
+    </section>
+
+    <section class="step" data-step="3">
+      <div class="step-head"><span class="step-num">04</span><h2 class="step-title">Closing Questions</h2></div>
+      <p class="step-sub">Last few questions, then you're done.</p>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="recommend">Would you recommend working here to a friend?</label>
+          <select id="recommend" name="recommend" required>
+            <option value="">Select one&hellip;</option>
+            <option>Definitely Yes</option>
+            <option>Probably Yes</option>
+            <option>Not Sure</option>
+            <option>Probably Not</option>
+            <option>Definitely Not</option>
+          </select>
+          <p class="field-error">Please select an option.</p>
+        </div>
+
+        <div class="field">
+          <label for="rehire">Would you work here again in the future?</label>
+          <select id="rehire" name="rehire" required>
+            <option value="">Select one&hellip;</option>
+            <option>Yes</option>
+            <option>Maybe</option>
+            <option>No</option>
+          </select>
+          <p class="field-error">Please select an option.</p>
+        </div>
+
+        <div class="field span-2">
+          <label for="mainReason">In your own words, what is the main reason you're leaving?</label>
+          <textarea id="mainReason" name="mainReason" required></textarea>
+          <p class="field-error">Please share a brief answer.</p>
+        </div>
+
+        <div class="field span-2">
+          <label for="retentionSuggestion">What could we have done to keep you? <span class="opt">(optional)</span></label>
+          <textarea id="retentionSuggestion" name="retentionSuggestion"></textarea>
+        </div>
+
+        <div class="field span-2">
+          <label for="additionalComments">Any other comments or suggestions? <span class="opt">(optional)</span></label>
+          <textarea id="additionalComments" name="additionalComments"></textarea>
+        </div>
+
+        <div class="field span-2">
+          <div class="checkbox-row">
+            <input type="checkbox" id="confirm" name="confirm" required>
+            <label for="confirm">I confirm the information provided above is accurate to the best of my knowledge.</label>
+          </div>
+          <p class="field-error">Please confirm before submitting.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="nav-row">
+      <button type="button" class="btn-ghost" id="backBtn">Back</button>
+      <button type="button" class="btn-primary" id="nextBtn">Continue</button>
+    </div>
+  </form>
+
+  <div class="card confirm" id="confirmCard">
+    <div class="confirm-badge">&#10003;</div>
+    <h2>Thank you.</h2>
+    <p>Your exit interview has been submitted to HR. We appreciate your honesty and the time you spent with M1 Global / Metro One Security.</p>
+  </div>
+</main>
+
+<iframe name="hidden_iframe" id="hidden_iframe" class="visually-hidden" title="submission target"></iframe>
+<form id="backendForm" class="visually-hidden" target="hidden_iframe" method="POST">
+</form>
+
+<script>
+  // ---- Backend wiring ----------------------------------------------------
+  // Points at an Apps Script Web App bound to the response Google Sheet.
+  // Set this to the deployed ".../exec" URL once it exists. Field names are
+  // sent as-is (matching each input's `name`) — no id mapping required.
+  var APPS_SCRIPT_URL = "PLACEHOLDER_APPS_SCRIPT_URL";
+
+  var RATING_SCALE = ["Excellent", "Good", "Fair", "Poor", "Very Poor"];
+  var RATING_FIELDS = [
+    ["overallSatisfaction", "Overall job satisfaction"],
+    ["payCompensation", "Pay & compensation"],
+    ["benefits", "Benefits"],
+    ["scheduleFlexibility", "Schedule / shift flexibility"],
+    ["supervisorRelationship", "Relationship with direct supervisor"],
+    ["leadershipCommunication", "Communication from leadership"],
+    ["trainingOnboarding", "Initial training & onboarding"],
+    ["equipmentResources", "Equipment, uniforms & resources"],
+    ["safetyConditions", "Safety conditions on the job"],
+    ["recognition", "Recognition for your work"],
+    ["growthOpportunities", "Growth / advancement opportunities"],
+    ["workplaceCulture", "Overall site / workplace culture"]
+  ];
+
+  var REASONS = [
+    "Pay / Compensation", "Benefits", "Work Schedule / Hours", "Workload / Staffing Levels",
+    "Relationship with Supervisor", "Communication from Leadership", "Lack of Career Advancement",
+    "Lack of Recognition", "Job Site / Client Conditions", "Safety Concerns", "Company Culture",
+    "Relocation", "Health / Personal / Family Reasons", "Return to School", "Retirement",
+    "Better Opportunity Elsewhere", "Other"
+  ];
+
+  (function buildRatingFields() {
+    var container = document.getElementById("ratingFields");
+    var grid = document.createElement("div");
+    grid.className = "field-grid";
+    RATING_FIELDS.forEach(function (pair) {
+      var id = pair[0], label = pair[1];
+      var wrap = document.createElement("div");
+      wrap.className = "field span-2";
+      var lab = document.createElement("label");
+      lab.setAttribute("for", id);
+      lab.textContent = label;
+      var sel = document.createElement("select");
+      sel.id = id; sel.name = id; sel.required = true;
+      var blank = document.createElement("option");
+      blank.value = ""; blank.textContent = "Select one…";
+      sel.appendChild(blank);
+      RATING_SCALE.forEach(function (opt) {
+        var o = document.createElement("option");
+        o.textContent = opt;
+        sel.appendChild(o);
+      });
+      var err = document.createElement("p");
+      err.className = "field-error";
+      err.textContent = "Please rate this area.";
+      wrap.appendChild(lab); wrap.appendChild(sel); wrap.appendChild(err);
+      grid.appendChild(wrap);
+    });
+    container.appendChild(grid);
+  })();
+
+  (function buildReasonFields() {
+    var primary = document.getElementById("primaryReason");
+    var secondary = document.getElementById("secondaryReason");
+    var blank = document.createElement("option");
+    blank.value = ""; blank.textContent = "Select one…";
+    primary.appendChild(blank.cloneNode(true));
+    var none = document.createElement("option");
+    none.textContent = "None";
+    secondary.appendChild(blank.cloneNode(true));
+    secondary.appendChild(none);
+    REASONS.forEach(function (r) {
+      primary.appendChild(new Option(r));
+      secondary.appendChild(new Option(r));
+    });
+  })();
+
+  // ---- Wizard navigation --------------------------------------------------
+  var form = document.getElementById("exitForm");
+  var steps = Array.prototype.slice.call(form.querySelectorAll(".step"));
+  var progressEl = document.getElementById("progress");
+  var backBtn = document.getElementById("backBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var confirmCard = document.getElementById("confirmCard");
+  var STEP_LABELS = ["Role Info", "Separation", "Experience", "Closing"];
+  var current = 0;
+
+  STEP_LABELS.forEach(function (label, i) {
+    var item = document.createElement("div");
+    item.className = "progress-step" + (i === 0 ? " active" : "");
+    item.setAttribute("role", "listitem");
+    var track = document.createElement("div");
+    track.className = "progress-track";
+    var lab = document.createElement("div");
+    lab.className = "progress-label";
+    lab.textContent = (i + 1) + ". " + label;
+    item.appendChild(track); item.appendChild(lab);
+    progressEl.appendChild(item);
+  });
+
+  function fieldsInStep(index) {
+    return Array.prototype.slice.call(steps[index].querySelectorAll("input, select, textarea"));
+  }
+
+  function validateStep(index) {
+    var valid = true;
+    var firstInvalid = null;
+    fieldsInStep(index).forEach(function (el) {
+      var wrap = el.closest(".field");
+      if (!wrap) return;
+      var ok = true;
+      if (el.hasAttribute("required")) {
+        if (el.type === "checkbox") ok = el.checked;
+        else ok = el.value.trim().length > 0;
+      }
+      if (el.id === "lastDay" && ok) {
+        var startVal = document.getElementById("startDate").value;
+        if (startVal && el.value && el.value < startVal) ok = false;
+      }
+      wrap.classList.toggle("invalid", !ok);
+      if (!ok) { valid = false; if (!firstInvalid) firstInvalid = el; }
+    });
+    if (firstInvalid) firstInvalid.focus();
+    return valid;
+  }
+
+  function showStep(index) {
+    steps.forEach(function (s, i) { s.classList.toggle("visible", i === index); });
+    var items = progressEl.querySelectorAll(".progress-step");
+    items.forEach(function (item, i) {
+      item.classList.toggle("active", i === index);
+      item.classList.toggle("done", i < index);
+    });
+    backBtn.disabled = index === 0;
+    nextBtn.textContent = index === steps.length - 1 ? "Submit" : "Continue";
+    current = index;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function updateTenure() {
+    var start = document.getElementById("startDate").value;
+    var end = document.getElementById("lastDay").value;
+    var readout = document.getElementById("tenureReadout");
+    var hidden = document.getElementById("tenure");
+    if (!start || !end) { readout.textContent = "Enter both dates above to calculate."; hidden.value = ""; return; }
+    var s = new Date(start), e = new Date(end);
+    if (e < s) { readout.textContent = "Last day must be on or after the start date."; hidden.value = ""; return; }
+    var months = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+    if (e.getDate() < s.getDate()) months -= 1;
+    if (months < 0) months = 0;
+    var years = Math.floor(months / 12);
+    var remMonths = months % 12;
+    var parts = [];
+    if (years > 0) parts.push(years + (years === 1 ? " year" : " years"));
+    parts.push(remMonths + (remMonths === 1 ? " month" : " months"));
+    var text = parts.join(", ") + (years === 0 && remMonths === 0 ? " (less than 1 month)" : "");
+    readout.textContent = text;
+    hidden.value = text;
+  }
+
+  document.getElementById("startDate").addEventListener("change", updateTenure);
+  document.getElementById("lastDay").addEventListener("change", updateTenure);
+
+  backBtn.addEventListener("click", function () {
+    if (current > 0) showStep(current - 1);
+  });
+
+  nextBtn.addEventListener("click", function () {
+    if (!validateStep(current)) return;
+    if (current < steps.length - 1) {
+      showStep(current + 1);
+    } else {
+      submitForm();
+    }
+  });
+
+  function submitForm() {
+    nextBtn.disabled = true;
+    nextBtn.textContent = "Submitting…";
+    backBtn.disabled = true;
+
+    var gForm = document.getElementById("backendForm");
+    gForm.innerHTML = "";
+
+    Array.prototype.slice.call(form.querySelectorAll("input, select, textarea")).forEach(function (el) {
+      if (!el.name) return;
+      var value = el.type === "checkbox" ? (el.checked ? "Yes" : "No") : el.value;
+      var hidden = document.createElement("input");
+      hidden.type = "hidden";
+      hidden.name = el.name;
+      hidden.value = value;
+      gForm.appendChild(hidden);
+    });
+
+    function showThankYou() {
+      form.style.display = "none";
+      progressEl.style.display = "none";
+      confirmCard.classList.add("visible");
+    }
+
+    if (APPS_SCRIPT_URL.indexOf("PLACEHOLDER") !== -1) {
+      console.warn("Exit Interview: backend not yet wired up — set APPS_SCRIPT_URL. Showing confirmation without submitting.");
+      setTimeout(showThankYou, 400);
+      return;
+    }
+
+    gForm.action = APPS_SCRIPT_URL;
+    var iframe = document.getElementById("hidden_iframe");
+    iframe.addEventListener("load", showThankYou, { once: true });
+    gForm.submit();
+  }
+
+  showStep(0);
+</script>
