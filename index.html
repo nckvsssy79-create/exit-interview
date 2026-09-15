@@ -482,13 +482,13 @@
     </section>
 
     <section class="step" data-step="1">
-      <div class="step-head"><span class="step-num">02</span><h2 class="step-title">Separation Details</h2></div>
-      <p class="step-sub">Help us understand the circumstances of your departure.</p>
+      <div class="step-head"><span class="step-num">02</span><h2 class="step-title">Separation &amp; Closing</h2></div>
+      <p class="step-sub">Help us understand your departure &mdash; answer whatever you're comfortable with.</p>
 
       <div class="field-grid">
         <div class="field span-2">
-          <label for="separationType">Separation type</label>
-          <select id="separationType" name="separationType" required>
+          <label for="separationType">Separation type <span class="opt">(optional)</span></label>
+          <select id="separationType" name="separationType">
             <option value="">Select one&hellip;</option>
             <option>Voluntary Resignation</option>
             <option>Retirement</option>
@@ -496,13 +496,11 @@
             <option>Job Abandonment</option>
             <option>Other</option>
           </select>
-          <p class="field-error">Please select a separation type.</p>
         </div>
 
         <div class="field span-2">
-          <label for="primaryReason">Primary reason for leaving</label>
-          <select id="primaryReason" name="primaryReason" required></select>
-          <p class="field-error">Please select your primary reason for leaving.</p>
+          <label for="primaryReason">Primary reason for leaving <span class="opt">(optional)</span></label>
+          <select id="primaryReason" name="primaryReason"></select>
         </div>
 
         <div class="field span-2">
@@ -511,15 +509,14 @@
         </div>
 
         <div class="field">
-          <label for="noticeGiven">Advance notice given</label>
-          <select id="noticeGiven" name="noticeGiven" required>
+          <label for="noticeGiven">Advance notice given <span class="opt">(optional)</span></label>
+          <select id="noticeGiven" name="noticeGiven">
             <option value="">Select one&hellip;</option>
             <option>Yes &ndash; 2 weeks or more</option>
             <option>Yes &ndash; less than 2 weeks</option>
             <option>No notice given</option>
             <option>Not applicable</option>
           </select>
-          <p class="field-error">Please select an option.</p>
         </div>
 
         <div class="field">
@@ -533,23 +530,10 @@
             <option>Prefer not to say</option>
           </select>
         </div>
-      </div>
-    </section>
 
-    <section class="step" data-step="2">
-      <div class="step-head"><span class="step-num">03</span><h2 class="step-title">Your Experience</h2></div>
-      <p class="step-sub">Rate each area based on your time with us.</p>
-      <div id="ratingFields"></div>
-    </section>
-
-    <section class="step" data-step="3">
-      <div class="step-head"><span class="step-num">04</span><h2 class="step-title">Closing Questions</h2></div>
-      <p class="step-sub">Last few questions, then you're done.</p>
-
-      <div class="field-grid">
         <div class="field">
-          <label for="recommend">Would you recommend working here to a friend?</label>
-          <select id="recommend" name="recommend" required>
+          <label for="recommend">Would you recommend working here to a friend? <span class="opt">(optional)</span></label>
+          <select id="recommend" name="recommend">
             <option value="">Select one&hellip;</option>
             <option>Definitely Yes</option>
             <option>Probably Yes</option>
@@ -557,24 +541,21 @@
             <option>Probably Not</option>
             <option>Definitely Not</option>
           </select>
-          <p class="field-error">Please select an option.</p>
         </div>
 
         <div class="field">
-          <label for="rehire">Would you work here again in the future?</label>
-          <select id="rehire" name="rehire" required>
+          <label for="rehire">Would you work here again in the future? <span class="opt">(optional)</span></label>
+          <select id="rehire" name="rehire">
             <option value="">Select one&hellip;</option>
             <option>Yes</option>
             <option>Maybe</option>
             <option>No</option>
           </select>
-          <p class="field-error">Please select an option.</p>
         </div>
 
         <div class="field span-2">
-          <label for="mainReason">In your own words, what is the main reason you're leaving?</label>
-          <textarea id="mainReason" name="mainReason" required></textarea>
-          <p class="field-error">Please share a brief answer.</p>
+          <label for="mainReason">In your own words, what is the main reason you're leaving? <span class="opt">(optional)</span></label>
+          <textarea id="mainReason" name="mainReason"></textarea>
         </div>
 
         <div class="field span-2">
@@ -589,12 +570,17 @@
 
         <div class="field span-2">
           <div class="checkbox-row">
-            <input type="checkbox" id="confirm" name="confirm" required>
+            <input type="checkbox" id="confirm" name="confirm">
             <label for="confirm">I confirm the information provided above is accurate to the best of my knowledge.</label>
           </div>
-          <p class="field-error">Please confirm before submitting.</p>
         </div>
       </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <div class="step-head"><span class="step-num">03</span><h2 class="step-title">Your Experience</h2></div>
+      <p class="step-sub">A few quick ratings &mdash; optional, but very helpful.</p>
+      <div id="ratingFields"></div>
     </section>
 
     <div class="nav-row">
@@ -625,15 +611,8 @@
   var RATING_FIELDS = [
     ["overallSatisfaction", "Overall job satisfaction"],
     ["payCompensation", "Pay & compensation"],
-    ["benefits", "Benefits"],
-    ["scheduleFlexibility", "Schedule / shift flexibility"],
     ["supervisorRelationship", "Relationship with direct supervisor"],
-    ["leadershipCommunication", "Communication from leadership"],
-    ["trainingOnboarding", "Initial training & onboarding"],
-    ["equipmentResources", "Equipment, uniforms & resources"],
     ["safetyConditions", "Safety conditions on the job"],
-    ["recognition", "Recognition for your work"],
-    ["growthOpportunities", "Growth / advancement opportunities"],
     ["workplaceCulture", "Overall site / workplace culture"]
   ];
 
@@ -657,7 +636,7 @@
       lab.setAttribute("for", id);
       lab.textContent = label;
       var sel = document.createElement("select");
-      sel.id = id; sel.name = id; sel.required = true;
+      sel.id = id; sel.name = id;
       var blank = document.createElement("option");
       blank.value = ""; blank.textContent = "Select one…";
       sel.appendChild(blank);
@@ -666,10 +645,7 @@
         o.textContent = opt;
         sel.appendChild(o);
       });
-      var err = document.createElement("p");
-      err.className = "field-error";
-      err.textContent = "Please rate this area.";
-      wrap.appendChild(lab); wrap.appendChild(sel); wrap.appendChild(err);
+      wrap.appendChild(lab); wrap.appendChild(sel);
       grid.appendChild(wrap);
     });
     container.appendChild(grid);
@@ -698,7 +674,7 @@
   var backBtn = document.getElementById("backBtn");
   var nextBtn = document.getElementById("nextBtn");
   var confirmCard = document.getElementById("confirmCard");
-  var STEP_LABELS = ["Role Info", "Separation", "Experience", "Closing"];
+  var STEP_LABELS = ["Role Info", "Separation & Closing", "Experience"];
   var current = 0;
 
   STEP_LABELS.forEach(function (label, i) {
