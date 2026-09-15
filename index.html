@@ -413,25 +413,23 @@
         </div>
 
         <div class="field">
-          <label for="company">Company / brand</label>
-          <select id="company" name="company" required>
+          <label for="company">Company / brand <span class="opt">(optional)</span></label>
+          <select id="company" name="company">
             <option value="">Select one&hellip;</option>
             <option>M1 Global</option>
             <option>Metro One Security</option>
             <option>Other / Not sure</option>
           </select>
-          <p class="field-error">Please select your company or brand.</p>
         </div>
 
         <div class="field">
-          <label for="jobTitle">Job title / position</label>
-          <input id="jobTitle" name="jobTitle" type="text" required>
-          <p class="field-error">Please enter your job title.</p>
+          <label for="jobTitle">Job title / position <span class="opt">(optional)</span></label>
+          <input id="jobTitle" name="jobTitle" type="text">
         </div>
 
         <div class="field">
-          <label for="department">Department</label>
-          <select id="department" name="department" required>
+          <label for="department">Department <span class="opt">(optional)</span></label>
+          <select id="department" name="department">
             <option value="">Select one&hellip;</option>
             <option>Security Operations (Field/Site)</option>
             <option>Operations Management</option>
@@ -442,13 +440,11 @@
             <option>Training</option>
             <option>Other</option>
           </select>
-          <p class="field-error">Please select a department.</p>
         </div>
 
         <div class="field span-2">
-          <label for="site">Site / client location</label>
-          <input id="site" name="site" type="text" required placeholder="e.g. Westfield Mall &ndash; Post 3">
-          <p class="field-error">Please enter your site or client location.</p>
+          <label for="site">Site / client location <span class="opt">(optional)</span></label>
+          <input id="site" name="site" type="text" placeholder="e.g. Westfield Mall &ndash; Post 3">
         </div>
 
         <div class="field">
@@ -457,26 +453,24 @@
         </div>
 
         <div class="field">
-          <label for="employmentType">Employment type</label>
-          <select id="employmentType" name="employmentType" required>
+          <label for="employmentType">Employment type <span class="opt">(optional)</span></label>
+          <select id="employmentType" name="employmentType">
             <option value="">Select one&hellip;</option>
             <option>Full-Time</option>
             <option>Part-Time</option>
             <option>Per-Diem / On-Call</option>
           </select>
-          <p class="field-error">Please select your employment type.</p>
         </div>
 
         <div class="field">
-          <label for="startDate">Start date</label>
-          <input id="startDate" name="startDate" type="date" required>
-          <p class="field-error">Please enter your start date.</p>
+          <label for="startDate">Start date <span class="opt">(optional)</span></label>
+          <input id="startDate" name="startDate" type="date">
         </div>
 
         <div class="field">
-          <label for="lastDay">Last day worked</label>
-          <input id="lastDay" name="lastDay" type="date" required>
-          <p class="field-error">Please enter a valid last day (on or after your start date).</p>
+          <label for="lastDay">Last day worked <span class="opt">(optional)</span></label>
+          <input id="lastDay" name="lastDay" type="date">
+          <p class="field-error">Last day must be on or after the start date.</p>
         </div>
 
         <div class="field span-2">
