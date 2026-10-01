@@ -310,6 +310,26 @@
   .checkbox-row input { width: 18px; height: 18px; margin-top: 2px; flex: none; }
   .checkbox-row label { font-weight: 600; }
 
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .anon-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .anon-toggle input { width: 16px; height: 16px; margin: 0; padding: 0; }
+
   .nav-row {
     display: flex;
     justify-content: space-between;
@@ -402,7 +422,10 @@
 
       <div class="field-grid">
         <div class="field span-2">
-          <label for="fullName">Full name</label>
+          <div class="label-row">
+            <label for="fullName">Full name <span class="opt" id="nameOpt" hidden>(optional)</span></label>
+            <label class="anon-toggle"><input type="checkbox" id="anonymous" name="anonymous"> Keep yourself anonymous</label>
+          </div>
           <input id="fullName" name="fullName" type="text" required autocomplete="name">
           <p class="field-error">Please enter your full name.</p>
         </div>
@@ -749,6 +772,13 @@
     readout.textContent = text;
     hidden.value = text;
   }
+
+  document.getElementById("anonymous").addEventListener("change", function () {
+    var nameEl = document.getElementById("fullName");
+    nameEl.required = !this.checked;
+    document.getElementById("nameOpt").hidden = !this.checked;
+    if (this.checked) nameEl.closest(".field").classList.remove("invalid");
+  });
 
   document.getElementById("startDate").addEventListener("change", updateTenure);
   document.getElementById("lastDay").addEventListener("change", updateTenure);
